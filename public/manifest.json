@@ -1,0 +1,10 @@
+{
+  "name": "Find The Others",
+  "short_name": "FTO",
+  "description": "A global community for seekers, misfits and free thinkers.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#7935F8",
+  "background_color": "#FCF8F3",
+  "icons": []
+}
