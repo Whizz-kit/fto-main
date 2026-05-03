@@ -196,7 +196,7 @@ export function ProfileDetail({
 
   return (
     <>
-      <SEO 
+      <SEO
         title={displayName}
         description={displayEssence || listing.about?.substring(0, 150) || "View this listing on Find The Others"}
         image={listing.image}
@@ -205,16 +205,28 @@ export function ProfileDetail({
         keywords={[listing.category || "community", ...cleanedTags]}
         schema={{
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": displayName,
-          "description": displayEssence,
-          "image": listing.image,
-          "url": `https://findtheothers.world/directory/${listing.slug || listing.id}`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": city,
-            "addressCountry": country
-          }
+          "@graph": [
+            {
+              "@type": "LocalBusiness",
+              "name": displayName,
+              "description": displayEssence,
+              "image": listing.image,
+              "url": `https://findtheothers.world/directory/${listing.slug || listing.id}`,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": city,
+                "addressCountry": country
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://findtheothers.world/" },
+                { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://findtheothers.world/directory" },
+                { "@type": "ListItem", "position": 3, "name": displayName }
+              ]
+            }
+          ]
         }}
       />
       <div className="min-h-screen bg-[#FCF8F3] flex flex-col">

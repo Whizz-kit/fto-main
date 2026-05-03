@@ -12,10 +12,18 @@ interface DirectoryHomeProps {
 export function DirectoryHome({ searchQuery, onSearchChange, onFilterClick }: DirectoryHomeProps) {
   return (
     <div className="w-full bg-[#101010] pt-36 pb-16 md:pt-40 md:pb-24 px-4">
-      <SEO 
+      <SEO
         title="Directory"
         description="A curated guide to people, places, and projects expanding consciousness around the world."
         url="/directory"
+        keywords={["directory", "communities", "retreats", "practitioners", "consciousness"]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "FTO Directory",
+          "description": "A curated guide to people, places, and projects expanding consciousness around the world.",
+          "url": "https://findtheothers.world/directory"
+        }}
       />
       <div className="max-w-4xl mx-auto text-center space-y-8">
         <div className="space-y-4">

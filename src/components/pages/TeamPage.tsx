@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import { Button } from "../ui/button";
+import { SEO } from "../SEO";
 import lillyImage from "figma:asset/e41d4b75ce20cf8eeedbb48c251a369516742c75.webp";
 import maxImage from "figma:asset/2e8ab948cd7412489b3dcb9fa6a3687130f608ce.webp";
 import alanaImage from "figma:asset/faef7eec2d08677355610952905c39503fb7245e.webp";
@@ -83,6 +84,12 @@ const teamMembers: TeamMember[] = [
 export function TeamPage({ onNavigate }: TeamPageProps) {
   return (
     <div className="min-h-screen bg-[#FCF8F3]">
+      <SEO
+        title="Our Team"
+        description="Meet the people behind Find The Others. A team dedicated to consciousness, connection, and transformation."
+        url="/about/team"
+        keywords={["team", "about", "find the others", "consciousness"]}
+      />
       {/* Hero Section - Dark Green Background */}
       <section className="bg-[#066237] pt-32 pb-16 px-4">
         <div className="max-w-6xl mx-auto text-center">

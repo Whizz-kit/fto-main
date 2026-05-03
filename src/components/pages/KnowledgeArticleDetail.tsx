@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Navigation } from "../Navigation";
 import { Footer } from "../Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
+import { SEO } from "../SEO";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { KnowledgeArticle, knowledgeCategories } from "../../data/types";
 import { mockKnowledge } from "../../data/mockContent";
@@ -59,9 +60,46 @@ export function KnowledgeArticleDetail({ articleId, articles, onBack, onNavigate
 
   return (
     <div className="min-h-screen bg-[#FCF8F3] flex flex-col">
+      <SEO
+        title={article.title}
+        description={article.excerpt}
+        image={article.image}
+        url={`/explore/${article.category}/${article.id}`}
+        type="article"
+        keywords={article.tags}
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "headline": article.title,
+              "description": article.excerpt,
+              "image": article.image,
+              "datePublished": article.publishedAt,
+              "dateModified": article.updatedAt || article.publishedAt,
+              "author": { "@type": "Organization", "name": "Find The Others" },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Find The Others",
+                "logo": { "@type": "ImageObject", "url": "https://findtheothers.world/og-image.jpg" }
+              },
+              "mainEntityOfPage": { "@type": "WebPage", "@id": `https://findtheothers.world/explore/${article.category}/${article.id}` }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://findtheothers.world/" },
+                { "@type": "ListItem", "position": 2, "name": "Explore", "item": "https://findtheothers.world/explore" },
+                { "@type": "ListItem", "position": 3, "name": categoryInfo?.title || article.category, "item": `https://findtheothers.world/explore/${article.category}` },
+                { "@type": "ListItem", "position": 4, "name": article.title }
+              ]
+            }
+          ]
+        }}
+      />
       {/* Navigation - Fixed */}
       <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-        <Navigation 
+        <Navigation
           onNavigate={onNavigate || (() => {})}
           onCommunityClick={onCommunityClick}
           currentPage="explore"

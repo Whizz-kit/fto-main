@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEO } from "../../SEO";
 import { CommunityLayoutV2 } from "./CommunityLayoutV2";
 import { CommunityFeedV2 } from "./CommunityFeedV2";
 import { CommunityChatV2 } from "./CommunityChatV2";
@@ -15,6 +16,13 @@ export function CommunityPageV2({ onExit }: CommunityPageProps) {
   const [activeChannel, setActiveChannel] = useState("general");
 
   return (
+    <>
+    <SEO
+      title="Community"
+      description="Join the Find The Others community. Connect with consciousness explorers, share experiences, and find your tribe."
+      url="/community"
+      keywords={["community", "consciousness", "connection", "discord"]}
+    />
     <CommunityLayoutV2
       activeTab={activeTab}
       onTabChange={setActiveTab}
@@ -28,5 +36,6 @@ export function CommunityPageV2({ onExit }: CommunityPageProps) {
       {activeTab === "profile" && <CommunityProfileV2 />}
       {activeTab === "submit" && <CommunitySubmitV2 />}
     </CommunityLayoutV2>
+    </>
   );
 }

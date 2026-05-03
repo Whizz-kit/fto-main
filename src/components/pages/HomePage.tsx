@@ -231,20 +231,34 @@ export function HomePage({
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Home"
         description="A curated ecosystem for consciousness, transformation, and human connection. Explore communities, wisdom, events, and tools for deeper awareness."
         keywords={["consciousness", "transformation", "community", "awareness", "wisdom", "retreats", "breathwork", "meditation"]}
         schema={{
           "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Find The Others",
-          "url": "https://findtheothers.world",
-          "logo": "https://findtheothers.world/logo.webp",
-          "description": "A curated ecosystem for consciousness, transformation, and human connection.",
-          "sameAs": [
-            "https://instagram.com/findtheothers",
-            "https://discord.com/invite/jXewfMFr4s"
+          "@graph": [
+            {
+              "@type": "Organization",
+              "name": "Find The Others",
+              "url": "https://findtheothers.world",
+              "logo": "https://findtheothers.world/og-image.jpg",
+              "description": "A curated ecosystem for consciousness, transformation, and human connection.",
+              "sameAs": [
+                "https://instagram.com/findtheothers",
+                "https://discord.com/invite/jXewfMFr4s"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "name": "Find The Others",
+              "url": "https://findtheothers.world",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://findtheothers.world/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
           ]
         }}
       />

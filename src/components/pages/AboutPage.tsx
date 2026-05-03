@@ -11,10 +11,19 @@ interface AboutPageProps {
 export function AboutPage({ onBackToDirectory }: AboutPageProps) {
   return (
     <div className="min-h-screen bg-[#7935F8]">
-      <SEO 
+      <SEO
         title="About Us"
         description="Find The Others is a public benefit corporation building a curated ecosystem for consciousness, transformation, and human connection."
         url="/about"
+        keywords={["about", "find the others", "consciousness", "public benefit corporation", "mission"]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Find The Others",
+          "description": "A public benefit corporation building a curated ecosystem for consciousness, transformation, and human connection.",
+          "url": "https://findtheothers.world",
+          "sameAs": ["https://instagram.com/findtheothers", "https://discord.com/invite/jXewfMFr4s"]
+        }}
       />
       {/* Hero - Purple Banner with Decorative Background */}
       <section className="relative pt-36 pb-16 md:pt-40 md:pb-24 px-4 overflow-hidden">

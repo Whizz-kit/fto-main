@@ -32,6 +32,17 @@ export function Navigation({ onCommunityClick, onNavigate, currentPage }: Naviga
     { label: "FTO Roadmap", value: "about-roadmap", disabled: false },
   ];
 
+  const pageToPath: Record<string, string> = {
+    home: "/",
+    directory: "/directory",
+    explore: "/explore",
+    news: "/news",
+    events: "/events",
+    about: "/about",
+    "about-roadmap": "/about/roadmap",
+    "about-team": "/about/team",
+  };
+
   const handleNavClick = (value: string) => {
     onNavigate(value);
     setMobileMenuOpen(false);
@@ -48,26 +59,27 @@ export function Navigation({ onCommunityClick, onNavigate, currentPage }: Naviga
           {/* Logo and Navigation Items - Left Aligned */}
           <div className="flex items-center gap-8">
             {/* Logo */}
-            <button onClick={() => handleNavClick("home")} className="flex-shrink-0">
-              <img 
-                src={logoImage} 
-                alt="Find The Others" 
+            <a href="/" onClick={(e) => { e.preventDefault(); handleNavClick("home"); }} className="flex-shrink-0">
+              <img
+                src={logoImage}
+                alt="Find The Others"
                 className="h-6 w-auto"
               />
-            </button>
+            </a>
             
             {/* Desktop Navigation Items */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {internalNavItems.map((item) => (
-                <button
+                <a
                   key={item.value}
-                  onClick={() => onNavigate(item.value)}
+                  href={pageToPath[item.value]}
+                  onClick={(e) => { e.preventDefault(); onNavigate(item.value); }}
                   className={`text-sm hover:text-primary transition-colors font-normal ${
                     currentPage === item.value ? 'text-primary' : ''
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
               
               {/* About Dropdown */}
@@ -76,34 +88,37 @@ export function Navigation({ onCommunityClick, onNavigate, currentPage }: Naviga
                 onMouseEnter={() => setAboutDropdownOpen(true)}
                 onMouseLeave={() => setAboutDropdownOpen(false)}
               >
-                <button
+                <a
+                  href="/about"
+                  onClick={(e) => e.preventDefault()}
                   className={`text-sm hover:text-primary transition-colors font-normal flex items-center gap-1 py-2 ${
                     currentPage?.startsWith('about') ? 'text-primary' : ''
                   }`}
                 >
                   About
                   <ChevronDown className={`w-3 h-3 transition-transform ${aboutDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
+                </a>
                 
                 {aboutDropdownOpen && (
                   <div className="absolute top-full left-0 pt-1 -mt-1">
                     <div className="bg-white rounded-2xl shadow-lg py-2 min-w-[200px] z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                       {aboutSubmenu.map((item) => (
-                        <button
+                        <a
                           key={item.value}
-                          onClick={() => {
+                          href={pageToPath[item.value]}
+                          onClick={(e) => {
+                            e.preventDefault();
                             if (!item.disabled) {
                               onNavigate(item.value);
                               setAboutDropdownOpen(false);
                             }
                           }}
-                          disabled={item.disabled}
-                          className={`w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
+                          className={`block w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
                             currentPage === item.value ? 'text-primary bg-primary/10' : ''
-                          } ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          } ${item.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
                         >
                           {item.label}
-                        </button>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -141,35 +156,36 @@ export function Navigation({ onCommunityClick, onNavigate, currentPage }: Naviga
           <div className="lg:hidden mt-2 bg-white rounded-3xl shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 pointer-events-auto">
             <div className="p-2">
               {internalNavItems.map((item) => (
-                <button
+                <a
                   key={item.value}
-                  onClick={() => handleNavClick(item.value)}
-                  className={`w-full text-left py-3 px-4 rounded-2xl transition-colors font-normal ${
-                    currentPage === item.value 
-                      ? 'bg-primary/10 text-primary' 
+                  href={pageToPath[item.value]}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(item.value); }}
+                  className={`block w-full text-left py-3 px-4 rounded-2xl transition-colors font-normal ${
+                    currentPage === item.value
+                      ? 'bg-primary/10 text-primary'
                       : 'hover:bg-muted'
                   }`}
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
               
               {/* About Submenu in Mobile */}
               <div className="pl-2">
                 <div className="text-xs uppercase text-muted-foreground px-4 py-2 mt-2">About</div>
                 {aboutSubmenu.map((item) => (
-                  <button
+                  <a
                     key={item.value}
-                    onClick={() => !item.disabled && handleNavClick(item.value)}
-                    disabled={item.disabled}
-                    className={`w-full text-left py-2 px-4 rounded-2xl transition-colors font-normal text-sm ${
-                      currentPage === item.value 
-                        ? 'bg-primary/10 text-primary' 
+                    href={pageToPath[item.value]}
+                    onClick={(e) => { e.preventDefault(); if (!item.disabled) handleNavClick(item.value); }}
+                    className={`block w-full text-left py-2 px-4 rounded-2xl transition-colors font-normal text-sm ${
+                      currentPage === item.value
+                        ? 'bg-primary/10 text-primary'
                         : 'hover:bg-muted'
-                    } ${item.disabled ? 'opacity-50' : ''}`}
+                    } ${item.disabled ? 'opacity-50 pointer-events-none' : ''}`}
                   >
                     {item.label}
-                  </button>
+                  </a>
                 ))}
               </div>
               

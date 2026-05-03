@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
+import { SEO } from "../SEO";
 import { knowledgeCategories, KnowledgeArticle } from "../../data/types";
 
 interface ExplorePageProps {
@@ -23,6 +24,12 @@ export function ExplorePage({ articles, onNavigate, onArticleClick }: ExplorePag
 
   return (
     <div className="min-h-screen bg-[#101010]">
+      <SEO
+        title="Explore Knowledge"
+        description="Articles, practices, and ideas on breathwork, meditation, psychedelics, and consciousness exploration."
+        url="/explore"
+        keywords={["knowledge", "consciousness", "breathwork", "meditation", "psychedelics", "mindfulness"]}
+      />
       {/* Hero Section - Dark Background */}
       <section className="pt-48 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-4">

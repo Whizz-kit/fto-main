@@ -1,5 +1,6 @@
 import { Navigation } from "../Navigation";
 import { Button } from "../ui/button";
+import { SEO } from "../SEO";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import phase2Image from "figma:asset/119c30e7a0d09e04c5c443323ffc0468459993d3.webp";
 import phase3Image from "figma:asset/896e6438d72f24252a8688e146a34fb9132ab658.webp";
@@ -25,6 +26,12 @@ export function RoadmapPage({ onNavigate = () => {}, onCommunityClick }: Roadmap
 
   return (
     <div className="min-h-screen bg-[#101010]">
+      <SEO
+        title="Roadmap"
+        description="Our roadmap for the future. See what we're building and where Find The Others is heading."
+        url="/about/roadmap"
+        keywords={["roadmap", "future", "find the others", "vision"]}
+      />
       <Navigation onNavigate={onNavigate} onCommunityClick={onCommunityClick} currentPage="about-roadmap" />
       
       <div className="pt-24 pb-20">

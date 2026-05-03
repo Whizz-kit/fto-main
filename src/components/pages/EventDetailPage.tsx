@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { Navigation } from "../Navigation";
 import { Footer } from "../Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
+import { SEO } from "../SEO";
 import { Event } from "../../data/types";
 import { mockEvents } from "../../data/mockContent";
 import { formatContent } from "../../utils/formatContent";
@@ -48,10 +49,49 @@ export function EventDetailPage({ eventId, events, onBack, onNavigate = () => {}
 
   return (
     <div className="min-h-screen bg-[#FCF8F3] flex flex-col">
+      <SEO
+        title={event.title}
+        description={event.description?.substring(0, 155) || `${event.title} — an event by ${event.organizer}`}
+        image={event.image}
+        url={`/events/${event.id}`}
+        keywords={event.tags}
+        schema={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Event",
+              "name": event.title,
+              "description": event.description,
+              "image": event.image,
+              "startDate": event.startDate,
+              "endDate": event.endDate || event.startDate,
+              "eventAttendanceMode": event.location?.type === 'online'
+                ? "https://schema.org/OnlineEventAttendanceMode"
+                : event.location?.type === 'hybrid'
+                ? "https://schema.org/MixedEventAttendanceMode"
+                : "https://schema.org/OfflineEventAttendanceMode",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "location": event.location?.type === 'online'
+                ? { "@type": "VirtualLocation", "url": event.location?.url || event.website }
+                : { "@type": "Place", "name": event.location?.venue || "", "address": { "@type": "PostalAddress", "addressLocality": event.location?.city, "addressCountry": event.location?.country } },
+              "organizer": { "@type": "Organization", "name": event.organizer },
+              ...(event.price ? { "offers": { "@type": "Offer", "price": event.price.type === 'free' ? "0" : event.price.amount || "", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": event.website } } : {})
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://findtheothers.world/" },
+                { "@type": "ListItem", "position": 2, "name": "Events", "item": "https://findtheothers.world/events" },
+                { "@type": "ListItem", "position": 3, "name": event.title }
+              ]
+            }
+          ]
+        }}
+      />
       {/* Navigation - Fixed */}
       <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <div className="pointer-events-auto">
-          <Navigation 
+          <Navigation
             onNavigate={onNavigate}
             onCommunityClick={onCommunityClick}
             currentPage="events"

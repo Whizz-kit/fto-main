@@ -3,6 +3,7 @@ import { Calendar, MapPin, ExternalLink, Globe, DollarSign } from "lucide-react"
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { FadeInSection } from "../FadeInSection";
+import { SEO } from "../SEO";
 import { Event } from "../../data/types";
 import { mockEvents } from "../../data/mockContent";
 import eventsBannerImage from "figma:asset/d639f8806e88b5fa661ea787ee27d4796c36f5e1.webp";
@@ -39,6 +40,12 @@ export function EventsPage({ onEventClick }: EventsPageProps) {
 
   return (
     <div className="min-h-screen bg-[#FCF8F3]">
+      <SEO
+        title="Events & Gatherings"
+        description="Retreats, workshops, ceremonies, and spaces where real connection happens. Find consciousness-expanding events worldwide."
+        url="/events"
+        keywords={["events", "retreats", "workshops", "ceremonies", "consciousness", "gatherings"]}
+      />
       {/* Hero */}
       <section className="pt-48 pb-12 px-4">
         <FadeInSection>

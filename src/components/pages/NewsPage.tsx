@@ -34,10 +34,18 @@ export function NewsPage({ onArticleClick }: NewsPageProps) {
 
   return (
     <div className="min-h-screen bg-[#FCF8F3]">
-      <SEO 
+      <SEO
         title="News & Insights"
         description="Latest news, stories, and research from the consciousness community."
         url="/news"
+        keywords={["news", "insights", "consciousness", "research", "stories"]}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "News & Insights",
+          "description": "Latest news, stories, and research from the consciousness community.",
+          "url": "https://findtheothers.world/news"
+        }}
       />
       {/* Hero */}
       <section className="pt-48 pb-12 px-4">

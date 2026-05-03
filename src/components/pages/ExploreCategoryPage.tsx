@@ -5,6 +5,7 @@ import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
+import { SEO } from "../SEO";
 import { KnowledgeArticle, knowledgeCategories } from "../../data/types";
 import { mockKnowledge } from "../../data/mockContent";
 
@@ -70,6 +71,12 @@ export function ExploreCategoryPage({ category, articles, onBack, onArticleClick
 
   return (
     <div className="min-h-screen pt-20 bg-[#FCF8F3]">
+      <SEO
+        title={categoryInfo.title}
+        description={categoryInfo.description || `Explore articles about ${categoryInfo.title} on Find The Others.`}
+        url={`/explore/${category}`}
+        keywords={[category, "knowledge", "consciousness", categoryInfo.title.toLowerCase()]}
+      />
       {/* Header */}
       <section className="bg-[#FCF8F3] py-12 md:py-16 px-4">
         <div className="max-w-6xl mx-auto space-y-6">

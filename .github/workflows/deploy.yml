@@ -19,7 +19,13 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+
+      - name: Install Puppeteer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2 libpangocairo-1.0-0 libatk1.0-0 libcups2 libdrm2 libxshmfence1 libnss3
+
+      - run: npm run build:prerender
 
       - uses: cloudflare/wrangler-action@v3
         with:
