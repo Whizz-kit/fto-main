@@ -20,7 +20,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - run: npm run build:prerender
 
       - uses: cloudflare/wrangler-action@v3
         with:
