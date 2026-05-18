@@ -21,7 +21,7 @@ export interface Listing {
 }
 
 // Generate a URL-friendly slug from a listing name
-export function generateSlug(name: string): string {
+function generateSlug(name: string): string {
   return name
     .toLowerCase()
     .replace(/['']/g, '')
@@ -118,6 +118,7 @@ export interface KnowledgeArticle {
   publishedAt: string;
   tags: string[];
   featured?: boolean;
+  author?: string;
   createdAt?: string;
   updatedAt?: string;
 }

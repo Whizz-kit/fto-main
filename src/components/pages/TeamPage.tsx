@@ -1,14 +1,14 @@
 import { Mail } from "lucide-react";
 import { Button } from "../ui/button";
-import { SEO } from "../SEO";
-import lillyImage from "figma:asset/e41d4b75ce20cf8eeedbb48c251a369516742c75.webp";
-import maxImage from "figma:asset/2e8ab948cd7412489b3dcb9fa6a3687130f608ce.webp";
-import alanaImage from "figma:asset/faef7eec2d08677355610952905c39503fb7245e.webp";
-import avelineImage from "figma:asset/6568183043119ec286cd686269c8c80018d134f8.webp";
-import angelaImage from "figma:asset/a5f742ce709328991b6744e60aecfa938b87c10d.webp";
-import christiaanImage from "figma:asset/796d335c02d6fd1c7236613ee67329ae0c6799bd.webp";
-import mattImage from "figma:asset/55a62f5cc06cfb5c84a4517f54da144e546514de.webp";
-import chattyGImage from "figma:asset/2bf4570b58ca2f2019c7d6429bbff0d5c23b237c.webp";
+import { SEO } from "../shared/SEO";
+import lillyImage from "../../assets/team-lilly.webp";
+import maxImage from "../../assets/team-max.webp";
+import alanaImage from "../../assets/team-alana.webp";
+import avelineImage from "../../assets/team-aveline.webp";
+import angelaImage from "../../assets/team-angela.webp";
+import christiaanImage from "../../assets/team-christiaan.webp";
+import mattImage from "../../assets/team-matt.webp";
+import chattyGImage from "../../assets/team-chattyg.webp";
 
 interface TeamPageProps {
   onNavigate?: (page: string) => void;

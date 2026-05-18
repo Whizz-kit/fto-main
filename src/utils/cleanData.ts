@@ -47,12 +47,3 @@ export function cleanEssence(essence?: string, about?: string): string {
   return raw;
 }
 
-/**
- * Truncate about text to ~3 paragraphs max
- */
-export function truncateAbout(about?: string, maxParagraphs = 3): string {
-  if (!about) return '';
-  const paragraphs = about.split(/\n\n|\r?\n/).filter(p => p.trim().length > 0);
-  if (paragraphs.length <= maxParagraphs) return about;
-  return paragraphs.slice(0, maxParagraphs).join('\n\n');
-}

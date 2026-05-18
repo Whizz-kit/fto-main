@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, Share2, ChevronRight, Home } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { Navigation } from "../Navigation";
-import { Footer } from "../Footer";
+import { Navigation } from "../layout/Navigation";
+import { Footer } from "../layout/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
-import { SEO } from "../SEO";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { SEO } from "../shared/SEO";
+import { ImageWithFallback } from "../shared/ImageWithFallback";
 import { KnowledgeArticle, knowledgeCategories } from "../../data/types";
 import { mockKnowledge } from "../../data/mockContent";
-import { CommentsSection } from "../CommentsSection";
+import { CommentsSection } from "../directory/CommentsSection";
 import { formatContent } from "../../utils/formatContent";
 
 interface KnowledgeArticleDetailProps {

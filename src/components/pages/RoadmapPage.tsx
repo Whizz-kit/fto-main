@@ -1,10 +1,10 @@
-import { Navigation } from "../Navigation";
+import { Navigation } from "../layout/Navigation";
 import { Button } from "../ui/button";
-import { SEO } from "../SEO";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
-import phase2Image from "figma:asset/119c30e7a0d09e04c5c443323ffc0468459993d3.webp";
-import phase3Image from "figma:asset/896e6438d72f24252a8688e146a34fb9132ab658.webp";
-import phase4Image from "figma:asset/e33207b28ee90398f5ecd233825c222e1d14d981.webp";
+import { SEO } from "../shared/SEO";
+import { ImageWithFallback } from "../shared/ImageWithFallback";
+import phase2Image from "../../assets/roadmap-phase-2.webp";
+import phase3Image from "../../assets/roadmap-phase-3.webp";
+import phase4Image from "../../assets/roadmap-phase-4.webp";
 
 interface RoadmapPageProps {
   onNavigate?: (page: string) => void;

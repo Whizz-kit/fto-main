@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Calendar, User, Clock, Share2, Home, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "../ui/button";
-import { Navigation } from "../Navigation";
-import { Footer } from "../Footer";
+import { Navigation } from "../layout/Navigation";
+import { Footer } from "../layout/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { NewsArticle } from "../../data/types";
 import { mockNews } from "../../data/mockContent";
 import { useContent } from "../../hooks/useContent";
-import { CommentsSection } from "../CommentsSection";
+import { CommentsSection } from "../directory/CommentsSection";
 import { formatContent } from "../../utils/formatContent";
 
 interface NewsArticleDetailProps {

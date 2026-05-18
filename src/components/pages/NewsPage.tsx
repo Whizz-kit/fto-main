@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { ExternalLink, Calendar, Tag, ArrowRight } from "lucide-react";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { FadeInSection } from "../FadeInSection";
+import { FadeInSection } from "../shared/FadeInSection";
 import { NewsArticle } from "../../data/types";
 import { mockNews } from "../../data/mockContent";
-import newsBannerImage from "figma:asset/8cac59910940de3db89593ec1227d391299a4d36.webp";
+import newsBannerImage from "../../assets/news-banner.webp";
 import { useContent } from "../../hooks/useContent";
 
 interface NewsPageProps {

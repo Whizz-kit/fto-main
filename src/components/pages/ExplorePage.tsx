@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { knowledgeCategories, KnowledgeArticle } from "../../data/types";
 
 interface ExplorePageProps {

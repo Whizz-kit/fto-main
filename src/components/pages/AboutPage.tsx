@@ -1,8 +1,8 @@
 import { Circle } from "lucide-react";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { Button } from "../ui/button";
-import aboutBannerImage from "figma:asset/7574818ceb7d2006e67beb92337dfdb03c9d563c.webp";
-import gatheringImage from "figma:asset/0a76edd8ce2f9499a2774ab182cffa4883092ed2.webp";
+import aboutBannerImage from "../../assets/about-banner.webp";
+import gatheringImage from "../../assets/about-gathering.webp";
 
 interface AboutPageProps {
   onBackToDirectory: () => void;

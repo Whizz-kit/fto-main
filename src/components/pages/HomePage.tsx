@@ -2,13 +2,13 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { ArrowRight, Users, BookOpen, Calendar, MapPin, MessageCircle, Search, X, Sparkles, Newspaper } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { Navigation } from "../Navigation";
-import { Footer } from "../Footer";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { FadeInSection, StaggerContainer, StaggerItem } from "../FadeInSection";
-import { SEO } from "../SEO";
+import { Navigation } from "../layout/Navigation";
+import { Footer } from "../layout/Footer";
+import { ImageWithFallback } from "../shared/ImageWithFallback";
+import { FadeInSection, StaggerContainer, StaggerItem } from "../shared/FadeInSection";
+import { SEO } from "../shared/SEO";
 // SEO component uses native DOM APIs for meta tag management
-import fallbackImage from "figma:asset/045041457457f607eca32c5c5e7a7a719b2695c7.webp";
+import fallbackImage from "../../assets/fallback.webp";
 import { useContent } from "../../hooks/useContent";
 import { Listing, Event, NewsArticle, KnowledgeArticle } from "../../data/types";
 import { mockListings } from "../../data/mockListings";
@@ -131,7 +131,7 @@ export function HomePage({
     // For featured listings, sort by review count (popularity) and take top 4
     const topListings = [...activeListings]
       .filter(l => l.image && !l.image.includes('placeholder'))
-      .sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0))
+      .sort((a, b) => ((b as Listing & { reviewCount?: number }).reviewCount || 0) - ((a as Listing & { reviewCount?: number }).reviewCount || 0))
       .slice(0, 4);
     setDisplayListings(topListings.length > 0 ? topListings : activeListings.slice(0, 4));
 
@@ -876,7 +876,7 @@ export function HomePage({
                         />
                         <div className="absolute top-4 left-4">
                            <div className="bg-white/95 backdrop-blur-md text-[#066237] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">
-                              {event.type || 'Event'}
+                              {event.location?.type || 'Event'}
                            </div>
                         </div>
                       </div>

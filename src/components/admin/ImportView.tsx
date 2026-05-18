@@ -27,9 +27,9 @@ export function ImportView({ session: _session }: ImportViewProps) {
             const rows = parseCSV(text);
 
             let mappedData: Record<string, unknown>[] = [];
-            if (type === 'listings') mappedData = mapDirectoryCSV(rows);
-            else if (type === 'news') mappedData = mapNewsCSV(rows);
-            else if (type === 'knowledge') mappedData = mapExploreCSV(rows);
+            if (type === 'listings') mappedData = mapDirectoryCSV(rows) as unknown as Record<string, unknown>[];
+            else if (type === 'news') mappedData = mapNewsCSV(rows) as unknown as Record<string, unknown>[];
+            else if (type === 'knowledge') mappedData = mapExploreCSV(rows) as unknown as Record<string, unknown>[];
 
             setStats(prev => ({ ...prev, [type]: mappedData.length }));
             setPreviews(prev => ({ ...prev, [type]: mappedData }));

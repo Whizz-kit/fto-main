@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Calendar, MapPin, ExternalLink, Globe, DollarSign } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
-import { FadeInSection } from "../FadeInSection";
-import { SEO } from "../SEO";
+import { FadeInSection } from "../shared/FadeInSection";
+import { SEO } from "../shared/SEO";
 import { Event } from "../../data/types";
 import { mockEvents } from "../../data/mockContent";
-import eventsBannerImage from "figma:asset/d639f8806e88b5fa661ea787ee27d4796c36f5e1.webp";
+import eventsBannerImage from "../../assets/events-banner.webp";
 import { useContent } from "../../hooks/useContent";
 
 interface EventsPageProps {

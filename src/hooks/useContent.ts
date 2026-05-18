@@ -97,5 +97,3 @@ export function useContent<T>(type: ContentType) {
 
   return { data, loading, error, refresh, source };
 }
-
-export { SERVER_URL };

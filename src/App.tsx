@@ -1,17 +1,17 @@
 import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 // UI imports
 import { Toaster } from "./components/ui/sonner";
-import { ErrorBoundary } from "./components/ErrorBoundary";
-import { Navigation } from "./components/Navigation";
-import { DirectoryHome } from "./components/DirectoryHome";
-import { ResultsGrid } from "./components/ResultsGrid";
-import { ProfileDetail } from "./components/ProfileDetail";
-import { InlineFilters } from "./components/InlineFilters";
-import { SubmitModal } from "./components/SubmitModal";
-import { DiscordSignupModal } from "./components/DiscordSignupModal";
-import { Footer } from "./components/Footer";
+import { ErrorBoundary } from "./components/shared/ErrorBoundary";
+import { Navigation } from "./components/layout/Navigation";
+import { DirectoryHome } from "./components/directory/DirectoryHome";
+import { ResultsGrid } from "./components/directory/ResultsGrid";
+import { ProfileDetail } from "./components/directory/ProfileDetail";
+import { InlineFilters } from "./components/directory/InlineFilters";
+import { SubmitModal } from "./components/modals/SubmitModal";
+import { DiscordSignupModal } from "./components/modals/DiscordSignupModal";
+import { Footer } from "./components/layout/Footer";
 import { HomePage } from "./components/pages/HomePage";
-import { ScrollToTop } from "./components/ScrollToTop";
+import { ScrollToTop } from "./components/shared/ScrollToTop";
 
 // Lazy-loaded pages for code splitting
 const AboutPage = lazy(() => import("./components/pages/AboutPage").then(m => ({ default: m.AboutPage })));
@@ -25,13 +25,12 @@ const ExploreCategoryPage = lazy(() => import("./components/pages/ExploreCategor
 const KnowledgeArticleDetail = lazy(() => import("./components/pages/KnowledgeArticleDetail").then(m => ({ default: m.KnowledgeArticleDetail })));
 const RoadmapPage = lazy(() => import("./components/pages/RoadmapPage").then(m => ({ default: m.RoadmapPage })));
 const SearchResultsPage = lazy(() => import("./components/pages/SearchResultsPage").then(m => ({ default: m.SearchResultsPage })));
-const CommunityPage = lazy(() => import("./components/pages/CommunityPage").then(m => ({ default: m.CommunityPage })));
-const CommunityPageV2 = lazy(() => import("./components/pages/community-v2/CommunityPageV2").then(m => ({ default: m.CommunityPageV2 })));
+const CommunityPage = lazy(() => import("./components/pages/community/CommunityPage").then(m => ({ default: m.CommunityPage })));
 const AdminPage = lazy(() => import("./components/pages/AdminPage").then(m => ({ default: m.AdminPage })));
-import { ListingGridSkeleton } from "./components/ListingCardSkeleton";
+import { ListingGridSkeleton } from "./components/directory/ListingCardSkeleton";
 import { Listing, FilterType, Event, NewsArticle, KnowledgeArticle, ensureUniqueSlugs } from "./data/types";
-import { ImageWithFallback } from "./components/figma/ImageWithFallback";
-import fallbackImage from "figma:asset/045041457457f607eca32c5c5e7a7a719b2695c7.webp";
+import { ImageWithFallback } from "./components/shared/ImageWithFallback";
+import fallbackImage from "./assets/fallback.webp";
 
 import { mockListings } from "./data/mockListings";
 import { mockEvents, mockNews, mockKnowledge } from "./data/mockContent";
@@ -40,7 +39,7 @@ import { api } from "./utils/api";
 // Directory fallback image constant
 const FALLBACK_IMAGE_URL = fallbackImage;
 
-type View = "home" | "directory" | "detail" | "about" | "about-roadmap" | "about-team" | "news" | "news-detail" | "events" | "event-detail" | "explore" | "explore-category" | "explore-article" | "search-results" | "community" | "community-v2" | "admin";
+type View = "home" | "directory" | "detail" | "about" | "about-roadmap" | "about-team" | "news" | "news-detail" | "events" | "event-detail" | "explore" | "explore-category" | "explore-article" | "search-results" | "community" | "admin";
 
 // URL routing helpers
 function getPathFromState(
@@ -82,14 +81,12 @@ function getPathFromState(
         : exploreCategory 
         ? `/explore/${exploreCategory}` 
         : "/explore";
-    case "roadmap":
+    case "about-roadmap":
       return "/roadmap";
     case "search-results":
       return searchQuery ? `/search?q=${encodeURIComponent(searchQuery)}` : "/search";
     case "community":
       return "/community";
-    case "community-v2":
-      return "/community-v2";
     case "admin":
       return "/admin";
     default:
@@ -154,13 +151,10 @@ function parsePathToState(path: string): {
       return { view: "search-results" };
       
     case "roadmap":
-      return { view: "roadmap" };
+      return { view: "about-roadmap" };
 
     case "community":
       return { view: "community" };
-
-    case "community-v2":
-      return { view: "community-v2" };
 
     case "admin":
       return { view: "admin" };
@@ -391,7 +385,7 @@ export default function App() {
   };
 
   const handleDiscordClick = () => {
-    setView("community-v2");
+    setView("community");
   };
 
   const handleNavigate = (page: string) => {
@@ -454,7 +448,7 @@ export default function App() {
     <ErrorBoundary>
       <div className="min-h-screen flex flex-col">
         {/* Floating Navigation - fixed positioning with pointer-events fix */}
-      {view !== "detail" && view !== "news-detail" && view !== "explore-article" && view !== "search-results" && view !== "community" && view !== "community-v2" && view !== "event-detail" && view !== "admin" && (
+      {view !== "detail" && view !== "news-detail" && view !== "explore-article" && view !== "search-results" && view !== "community" && view !== "event-detail" && view !== "admin" && (
         <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
           <div className="pointer-events-auto">
             <Navigation 
@@ -507,8 +501,6 @@ export default function App() {
           />
         ) : view === "community" ? (
           <CommunityPage onExit={() => setView("home")} />
-        ) : view === "community-v2" ? (
-          <CommunityPageV2 onExit={() => setView("home")} />
         ) : view === "admin" ? (
           <AdminPage />
         ) : view === "detail" && selectedListing ? (
@@ -536,9 +528,8 @@ export default function App() {
             onCommunityClick={handleDiscordClick}
           />
         ) : view === "news" ? (
-          <NewsPage 
+          <NewsPage
             onArticleClick={handleNewsArticleClick}
-            onNavigate={handleNavigate}
           />
         ) : view === "news-detail" ? (
           <NewsArticleDetail 
@@ -650,7 +641,7 @@ export default function App() {
       </main>
 
       {/* Footer - Hide on pages that render their own footer */}
-      {view !== "home" && view !== "explore-article" && view !== "news-detail" && view !== "detail" && view !== "search-results" && view !== "community" && view !== "community-v2" && view !== "event-detail" && view !== "admin" && (
+      {view !== "home" && view !== "explore-article" && view !== "news-detail" && view !== "detail" && view !== "search-results" && view !== "community" && view !== "event-detail" && view !== "admin" && (
         <Footer 
           onNavigate={handleNavigate}
           onCommunityClick={handleDiscordClick}

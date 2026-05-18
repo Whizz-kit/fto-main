@@ -1,9 +1,9 @@
 import { ArrowLeft, Calendar, MapPin, Globe, ExternalLink, Home, ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
-import { Navigation } from "../Navigation";
-import { Footer } from "../Footer";
+import { Navigation } from "../layout/Navigation";
+import { Footer } from "../layout/Footer";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { Event } from "../../data/types";
 import { mockEvents } from "../../data/mockContent";
 import { formatContent } from "../../utils/formatContent";

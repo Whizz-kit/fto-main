@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
 import {
-  Plus, Trash2, Upload, Link as LinkIcon, Loader2,
+  Trash2, Upload, Link as LinkIcon, Loader2,
   Users, Calendar, Newspaper, BookOpen, Settings
 } from "lucide-react";
 import { projectId } from "../../utils/supabase/info";
@@ -46,55 +46,6 @@ export function NavButton({ active, onClick, children, icon }: NavButtonProps) {
             <Icon className={`w-4 h-4 ${active ? 'text-[#7935F8]' : 'text-gray-400'}`} />
             {children}
         </button>
-    );
-}
-
-interface ArrayInputProps {
-    label: string;
-    items: string[];
-    onAdd: (value: string) => void;
-    onRemove: (index: number) => void;
-}
-
-export function ArrayInput({ label, items, onAdd, onRemove }: ArrayInputProps) {
-    const [val, setVal] = useState("");
-    return (
-        <div className="space-y-3">
-            <Label>{label}</Label>
-            <div className="space-y-2">
-                {items.map((item: string, i: number) => (
-                    <div key={i} className="flex items-start gap-2 group">
-                        <div className="flex-1 text-sm bg-gray-50 p-2 rounded-lg border border-transparent group-hover:border-gray-200">{item}</div>
-                        <button onClick={() => onRemove(i)} className="p-2 text-gray-400 hover:text-red-500">
-                            <Trash2 className="w-4 h-4" />
-                        </button>
-                    </div>
-                ))}
-            </div>
-            <div className="flex gap-2">
-                <Input
-                    value={val}
-                    onChange={e => setVal(e.target.value)}
-                    placeholder="Add item..."
-                    className="h-9 text-sm"
-                    onKeyDown={e => {
-                        if (e.key === 'Enter') {
-                            e.preventDefault();
-                            onAdd(val);
-                            setVal("");
-                        }
-                    }}
-                />
-                <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => { onAdd(val); setVal(""); }}
-                    className="rounded-lg px-3 border-gray-200"
-                >
-                    <Plus className="w-4 h-4" />
-                </Button>
-            </div>
-        </div>
     );
 }
 

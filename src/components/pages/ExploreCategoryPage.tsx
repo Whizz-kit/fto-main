@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 import { Badge } from "../ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
-import { SEO } from "../SEO";
+import { SEO } from "../shared/SEO";
 import { KnowledgeArticle, knowledgeCategories } from "../../data/types";
 import { mockKnowledge } from "../../data/mockContent";
 
@@ -130,7 +130,7 @@ export function ExploreCategoryPage({ category, articles, onBack, onArticleClick
                 className="pl-10 rounded-full"
               />
             </div>
-            <Select value={sortBy} onValueChange={(value: string) => setSortBy(value)}>
+            <Select value={sortBy} onValueChange={(value) => setSortBy(value as typeof sortBy)}>
               <SelectTrigger className="w-full sm:w-[180px] rounded-full">
                 <div className="flex items-center gap-2">
                   <Filter className="w-4 h-4" />

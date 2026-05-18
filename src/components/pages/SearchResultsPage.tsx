@@ -3,10 +3,10 @@ import { ArrowLeft, Search, Users, Calendar, BookOpen, Newspaper, MapPin, ArrowR
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
-import { Navigation } from "../Navigation";
-import { Footer } from "../Footer";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { SEO } from "../SEO";
+import { Navigation } from "../layout/Navigation";
+import { Footer } from "../layout/Footer";
+import { ImageWithFallback } from "../shared/ImageWithFallback";
+import { SEO } from "../shared/SEO";
 import type { Listing, Event, NewsArticle, KnowledgeArticle } from "../../data/types";
 import { cleanEssence } from "../../utils/cleanData";
 
@@ -84,7 +84,10 @@ export function SearchResultsPage({
 
   return (
     <div className="min-h-screen bg-[#FCF8F3] flex flex-col">
-      <SEO title={`Search Results for "${query}"`} />
+      <SEO
+        title={`Search Results for "${query}"`}
+        description={`Search results for "${query}" across listings, news, events, and knowledge articles.`}
+      />
       
       {/* Navigation */}
       <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">

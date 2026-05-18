@@ -136,5 +136,3 @@ export const api = {
     }
   }
 };
-
-export { SERVER_URL };
